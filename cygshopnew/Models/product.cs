@@ -23,7 +23,6 @@ namespace cygshopnew.Models
         public int id { get; set; }
         public string name { get; set; }
         public string Description { get; set; }
-        public byte[] image { get; set; }
         public decimal unit_price { get; set; }
         public int category_id { get; set; }
         public int quantity { get; set; }

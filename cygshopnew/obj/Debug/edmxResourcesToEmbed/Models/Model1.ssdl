@@ -12,31 +12,40 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="product">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="image" Type="image" />
     <Property Name="unit-price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="category-id" Type="int" Nullable="false" />
     <Property Name="quantity" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="user">
+  <EntityType Name="registeration">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="email" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phonenumber" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="isadmin" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="user-cart">
     <Key>
@@ -82,15 +91,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_user-cart_user">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="user-cart" Type="Self.user-cart" Multiplicity="*" />
+  <Association Name="FK_user-cart_registeration">
+    <End Role="registeration" Type="Self.registeration" Multiplicity="1" />
+    <End Role="user-cart" Type="Self.user-cart" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="user">
+      <Principal Role="registeration">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="user-cart">
-        <PropertyRef Name="user-id" />
+        <PropertyRef Name="id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -98,7 +107,8 @@
     <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="registeration" EntityType="Self.registeration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user-cart" EntityType="Self.user-cart" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_cart_product" Association="Self.FK_cart_product">
       <End Role="product" EntitySet="product" />
@@ -112,8 +122,8 @@
       <End Role="cart" EntitySet="cart" />
       <End Role="user-cart" EntitySet="user-cart" />
     </AssociationSet>
-    <AssociationSet Name="FK_user-cart_user" Association="Self.FK_user-cart_user">
-      <End Role="user" EntitySet="user" />
+    <AssociationSet Name="FK_user-cart_registeration" Association="Self.FK_user-cart_registeration">
+      <End Role="registeration" EntitySet="registeration" />
       <End Role="user-cart" EntitySet="user-cart" />
     </AssociationSet>
   </EntityContainer>

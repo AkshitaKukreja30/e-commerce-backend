@@ -26,9 +26,10 @@ namespace cygshopnew.Models
         }
     
         public virtual DbSet<cart> carts { get; set; }
+        public virtual DbSet<user_cart> user_cart { get; set; }
+        public virtual DbSet<registeration> registerations { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<category> categories { get; set; }
         public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<user_cart> user_cart { get; set; }
-        public virtual DbSet<user> users { get; set; }
     }
 }

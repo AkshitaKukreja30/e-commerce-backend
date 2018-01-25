@@ -6,14 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0ea6dc85ddf44cc0bb92aff82a787fbb" Name="Diagram1">
         <EntityTypeShape EntityType="cygshopnewModel.cart" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cygshopnewModel.category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="cygshopnewModel.product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="cygshopnewModel.user_cart" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="cygshopnewModel.FK_cart_product" ManuallyRouted="false" />
         <AssociationConnector Association="cygshopnewModel.FK_user_cart_cart" ManuallyRouted="false" />
-        <AssociationConnector Association="cygshopnewModel.FK_product_categories" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="cygshopnewModel.user" Width="1.5" PointX="0.75" PointY="5" />
-        <AssociationConnector Association="cygshopnewModel.FK_user_cart_user" />
+        <EntityTypeShape EntityType="cygshopnewModel.registeration" Width="1.5" PointX="3.375" PointY="5" />
+        <EntityTypeShape EntityType="cygshopnewModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
+        <AssociationConnector Association="cygshopnewModel.FK_user_cart_registeration" />
+        <EntityTypeShape EntityType="cygshopnewModel.category" Width="1.5" PointX="0.875" PointY="1.625" />
+        <EntityTypeShape EntityType="cygshopnewModel.product" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="cygshopnewModel.FK_cart_product" />
+        <AssociationConnector Association="cygshopnewModel.FK_product_categories" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

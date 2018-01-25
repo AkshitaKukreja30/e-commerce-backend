@@ -87,7 +87,7 @@ namespace cygshopnew.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/categories
+        // POST: api/categories/Postcategory
         [ResponseType(typeof(category))]
         public IHttpActionResult Postcategory(category category)
         {

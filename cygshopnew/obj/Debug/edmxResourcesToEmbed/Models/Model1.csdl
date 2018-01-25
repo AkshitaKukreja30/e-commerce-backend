@@ -7,30 +7,8 @@
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="pid" Type="Int32" Nullable="false" />
     <Property Name="qty" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <NavigationProperty Name="product" Relationship="Self.FK_cart_product" FromRole="cart" ToRole="product" />
     <NavigationProperty Name="user_cart" Relationship="Self.FK_user_cart_cart" FromRole="cart" ToRole="user_cart" />
-  </EntityType>
-  <EntityType Name="category">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="products" Relationship="Self.FK_product_categories" FromRole="categories" ToRole="product" />
-  </EntityType>
-  <EntityType Name="product">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="unit_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="category_id" Type="Int32" Nullable="false" />
-    <Property Name="quantity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="carts" Relationship="Self.FK_cart_product" FromRole="product" ToRole="cart" />
-    <NavigationProperty Name="category" Relationship="Self.FK_product_categories" FromRole="product" ToRole="categories" />
+    <NavigationProperty Name="product" Relationship="cygshopnewModel.FK_cart_product" FromRole="cart" ToRole="product" />
   </EntityType>
   <EntityType Name="user_cart">
     <Key>
@@ -40,20 +18,8 @@
     <Property Name="user_id" Type="Int32" Nullable="false" />
     <Property Name="cart_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="cart" Relationship="Self.FK_user_cart_cart" FromRole="user_cart" ToRole="cart" />
-    <NavigationProperty Name="user" Relationship="cygshopnewModel.FK_user_cart_user" FromRole="user_cart" ToRole="user" />
+    <NavigationProperty Name="registeration" Relationship="cygshopnewModel.FK_user_cart_registeration" FromRole="user_cart" ToRole="registeration" />
   </EntityType>
-  <Association Name="FK_cart_product">
-    <End Role="product" Type="Self.product" Multiplicity="1" />
-    <End Role="cart" Type="Self.cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="product">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="cart">
-        <PropertyRef Name="pid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_user_cart_cart">
     <End Role="cart" Type="Self.cart" Multiplicity="1" />
     <End Role="user_cart" Type="Self.user_cart" Multiplicity="*" />
@@ -66,62 +32,106 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_product_categories">
-    <End Role="categories" Type="Self.category" Multiplicity="1" />
-    <End Role="product" Type="Self.product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="categories">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="product">
-        <PropertyRef Name="category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="cygshopnewEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="carts" EntityType="Self.cart" />
-    <EntitySet Name="categories" EntityType="Self.category" />
-    <EntitySet Name="products" EntityType="Self.product" />
     <EntitySet Name="user_cart" EntityType="Self.user_cart" />
-    <AssociationSet Name="FK_cart_product" Association="Self.FK_cart_product">
-      <End Role="product" EntitySet="products" />
-      <End Role="cart" EntitySet="carts" />
-    </AssociationSet>
     <AssociationSet Name="FK_user_cart_cart" Association="Self.FK_user_cart_cart">
       <End Role="cart" EntitySet="carts" />
       <End Role="user_cart" EntitySet="user_cart" />
     </AssociationSet>
-    <AssociationSet Name="FK_product_categories" Association="Self.FK_product_categories">
-      <End Role="categories" EntitySet="categories" />
-      <End Role="product" EntitySet="products" />
-    </AssociationSet>
-    <EntitySet Name="users" EntityType="cygshopnewModel.user" />
-    <AssociationSet Name="FK_user_cart_user" Association="cygshopnewModel.FK_user_cart_user">
-      <End Role="user" EntitySet="users" />
+    <EntitySet Name="registerations" EntityType="cygshopnewModel.registeration" />
+    <EntitySet Name="sysdiagrams" EntityType="cygshopnewModel.sysdiagram" />
+    <AssociationSet Name="FK_user_cart_registeration" Association="cygshopnewModel.FK_user_cart_registeration">
+      <End Role="registeration" EntitySet="registerations" />
       <End Role="user_cart" EntitySet="user_cart" />
     </AssociationSet>
+    <EntitySet Name="categories" EntityType="cygshopnewModel.category" />
+    <EntitySet Name="products" EntityType="cygshopnewModel.product" />
+    <AssociationSet Name="FK_cart_product" Association="cygshopnewModel.FK_cart_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_categories" Association="cygshopnewModel.FK_product_categories">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="user">
+  <EntityType Name="registeration">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="email" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="isadmin" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="user_cart" Relationship="cygshopnewModel.FK_user_cart_user" FromRole="user" ToRole="user_cart" />
+    <NavigationProperty Name="user_cart" Relationship="cygshopnewModel.FK_user_cart_registeration" FromRole="registeration" ToRole="user_cart" />
   </EntityType>
-  <Association Name="FK_user_cart_user">
-    <End Type="cygshopnewModel.user" Role="user" Multiplicity="1" />
-    <End Type="cygshopnewModel.user_cart" Role="user_cart" Multiplicity="*" />
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_user_cart_registeration">
+    <End Type="cygshopnewModel.registeration" Role="registeration" Multiplicity="1" />
+    <End Type="cygshopnewModel.user_cart" Role="user_cart" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="user">
+      <Principal Role="registeration">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="user_cart">
-        <PropertyRef Name="user_id" />
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="cygshopnewModel.FK_product_categories" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="unit_price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="carts" Relationship="cygshopnewModel.FK_cart_product" FromRole="product" ToRole="cart" />
+    <NavigationProperty Name="category" Relationship="cygshopnewModel.FK_product_categories" FromRole="product" ToRole="category" />
+  </EntityType>
+  <Association Name="FK_cart_product">
+    <End Type="cygshopnewModel.product" Role="product" Multiplicity="1" />
+    <End Type="cygshopnewModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_categories">
+    <End Type="cygshopnewModel.category" Role="category" Multiplicity="1" />
+    <End Type="cygshopnewModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -12,22 +12,15 @@ namespace cygshopnew.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class registeration
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
-        {
-            this.user_cart = new HashSet<user_cart>();
-        }
-    
-        public string name { get; set; }
         public int id { get; set; }
-        public string address { get; set; }
-        public string phone { get; set; }
+        public string name { get; set; }
         public string email { get; set; }
+        public string password { get; set; }
+        public decimal phonenumber { get; set; }
         public int isadmin { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user_cart> user_cart { get; set; }
+        public virtual user_cart user_cart { get; set; }
     }
 }
