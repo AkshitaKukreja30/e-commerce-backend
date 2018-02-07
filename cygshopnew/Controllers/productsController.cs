@@ -52,6 +52,7 @@ namespace cygshopnew.Controllers
                 obj["description"] = product.Description;
                 obj["unitprice"] = product.unit_price;
                 obj["categoryid"] = product.category_id;
+                obj["imgofproduct"] = product.imgofproduct;
                 obj["quantity"] = product.quantity;
 
                 if (cid == product.category_id)
@@ -94,7 +95,30 @@ namespace cygshopnew.Controllers
         }
 
 
+        public JArray GetAllProducts()
+        {
+            List<product> products = db.products.ToList();
+            JArray array = new JArray();
 
+            foreach (var product in products)
+            {
+
+                JObject obj = new JObject();
+                obj["id"] = product.id;
+                obj["name"] = product.name;
+                obj["description"] = product.Description;
+                obj["unitprice"] = product.unit_price;
+                obj["categoryid"] = product.category_id;
+                obj["imgofproduct"] = product.imgofproduct;
+                obj["quantity"] = product.quantity;
+                              
+                array.Add(obj);
+                
+            }
+
+            return array;
+
+        }
 
 
 

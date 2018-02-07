@@ -53,6 +53,7 @@
     <EntitySetMapping Name="products">
       <EntityTypeMapping TypeName="cygshopnewModel.product">
         <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="imgofproduct" ColumnName="imgofproduct" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="category_id" ColumnName="category-id" />
           <ScalarProperty Name="unit_price" ColumnName="unit-price" />

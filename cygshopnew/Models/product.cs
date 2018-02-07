@@ -26,6 +26,7 @@ namespace cygshopnew.Models
         public decimal unit_price { get; set; }
         public int category_id { get; set; }
         public int quantity { get; set; }
+        public string imgofproduct { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }

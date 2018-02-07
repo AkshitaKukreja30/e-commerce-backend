@@ -12,10 +12,10 @@
         <EntityTypeShape EntityType="cygshopnewModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
         <AssociationConnector Association="cygshopnewModel.FK_user_cart_registeration" />
         <EntityTypeShape EntityType="cygshopnewModel.category" Width="1.5" PointX="0.875" PointY="1.625" />
-        <EntityTypeShape EntityType="cygshopnewModel.product" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="cygshopnewModel.product" Width="1.5" PointX="3.125" PointY="9" />
         <AssociationConnector Association="cygshopnewModel.FK_cart_product" />
         <AssociationConnector Association="cygshopnewModel.FK_product_categories" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -108,6 +108,7 @@
     <Property Name="unit_price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="category_id" Type="Int32" Nullable="false" />
     <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="imgofproduct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="carts" Relationship="cygshopnewModel.FK_cart_product" FromRole="product" ToRole="cart" />
     <NavigationProperty Name="category" Relationship="cygshopnewModel.FK_product_categories" FromRole="product" ToRole="category" />
   </EntityType>
